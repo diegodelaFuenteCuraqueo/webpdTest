@@ -52,6 +52,11 @@
         webPdExamples.patchLoaded(mainStr)
       })
 
+      function setAmp (amp){
+
+        Pd.send("amp", [parseFloat($("#ampInput").val())] );
+      }
+
     </script>
 
   </body>

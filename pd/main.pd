@@ -14,8 +14,8 @@
 #X obj 259 18 r ampIn;
 #X obj 259 60 line~;
 #X obj 269 152 line;
-#X obj 135 21 osc~ 444;
-#X obj 135 42 *~ 0.2;
+#X obj 67 216 osc~ 444;
+#X obj 67 237 *~ 0.2;
 #X connect 1 0 4 0;
 #X connect 2 0 13 0;
 #X connect 3 0 1 0;

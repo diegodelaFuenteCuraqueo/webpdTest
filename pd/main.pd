@@ -12,12 +12,13 @@
 #X obj 244 229 line~;
 #X obj 309 113 adc~;
 #X obj 308 145 delay~ 44100 44100;
+#X obj 128 151 *~ 1;
 #X connect 1 0 6 0;
 #X connect 2 0 3 0;
 #X connect 3 0 1 0;
 #X connect 4 0 1 0;
 #X connect 5 0 4 0;
-#X connect 6 0 7 0;
+#X connect 6 0 13 0;
 #X connect 7 0 0 0;
 #X connect 7 0 0 1;
 #X connect 8 0 9 0;
@@ -25,4 +26,7 @@
 #X connect 10 0 7 1;
 #X connect 11 0 12 0;
 #X connect 11 0 7 0;
+#X connect 11 1 7 0;
+#X connect 11 1 12 0;
 #X connect 12 0 7 0;
+#X connect 13 0 7 0;

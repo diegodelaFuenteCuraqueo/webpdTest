@@ -41,7 +41,7 @@
 
       $('#setAmp').submit(function(event) {
         event.preventDefault()
-        Pd.send('freq', [parseFloat($('#freqInput').val())])
+        Pd.send('amp', [parseFloat($('#ampInput').val())])
       })
 
       var patch

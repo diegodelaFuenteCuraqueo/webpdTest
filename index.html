@@ -20,7 +20,8 @@
     
     <div id="controls">
       <div class="slidecontainer">
-        <input type="range" min="20" max="10000" value="1000" class="slider" id="LPfreq" name="LPfreq">
+        <input type="range" min="20" max="10000" value="1000" class="slider" id="LPfreq" name="LPfreq" onchange="setLPfreq()">
+
         <input type="range" min="0" max="2." value=".5" class="slider" id="ampInput" name="ampInput">
       </div>
       <!--
@@ -69,8 +70,8 @@
       function setFreq (fq){
         Pd.send("amp", [parseFloat(fq)] );
       }
-      function setLPfreq (lpf){
-        Pd.send("lowPass", [parseFloat(lpf)] );
+      function setLPfreq (){
+        Pd.send("LPfreq", [parseFloat( $('#LPfreq').val() )] );
       }
 
     </script>

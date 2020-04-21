@@ -22,13 +22,10 @@
       </form>
 
       <form id="setAmp">
-        <input type="text" id="ampInput" />
+        <input type="text" id="ampInput" name="ampInput" />
         <input type="submit" value="Set Amplitude" />
       </form>
     </div>
-
-    <div id="pdfuNote">Patch rendered to SVG using <a href="https://github.com/sebpiq/pd-fileutils">pd-fileutils</a></div>
-    <div id="svg"></div>
 
     <script type="text/javascript">
       
@@ -52,11 +49,14 @@
         webPdExamples.patchLoaded(mainStr)
       })
 
-      function setAmp (amp){
+      function setAmp (am){
 
-        Pd.send("amp", [parseFloat($("#ampInput").val())] );
+        Pd.send("amp", [parseFloat(am)] );
       }
+      function setFreq (fq){
 
+        Pd.send("amp", [parseFloat(fq)] );
+      }
     </script>
 
   </body>

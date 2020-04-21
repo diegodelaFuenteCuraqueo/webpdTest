@@ -24,8 +24,10 @@
         <input type="range" min="20" max="10000" value="1000" class="slider" id="LPfreq" name="LPfreq" onchange="setLPfreq()">
 
         <LABEL for="ampInput">Mic. amp.</LABEL>
-        <input type="range" min="0" max="2." value=".5" class="slider" id="ampInput" name="ampInput">
+        <input type="range" min="0" max="2." value=".5" class="slider" id="ampInput" name="ampInput" onchange="setAmp()">
       </div>
+
+      <p id="txt"> val </p>
       <!--
       <form id="setAmp">
         <input type="text" id="ampInput" name="ampInput" />
@@ -58,14 +60,22 @@
       */
 
 
-      function setAmp (am){
-        Pd.send("amp", [parseFloat(am)] );
+      function setAmpVal (am){
+        Pd.send("ampIn", [parseFloat(am)] );
       }
-      function setFreq (fq){
-        Pd.send("amp", [parseFloat(fq)] );
+      function setAmp (){
+        Pd.send("ampIn", [parseFloat( $('#ampInput').val() )] );
+        
+        $("#txt").val() = $('#ampInput').val();
+
       }
+
+
       function setLPfreq (){
         Pd.send("LPfreq", [parseFloat( $('#LPfreq').val() )] );
+      }
+      function setLPfreqVal (lpf){
+        Pd.send("LPfreq", [parseFloat( lpf )] );
       }
 
     </script>

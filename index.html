@@ -33,7 +33,7 @@
     <script type="text/javascript">
       
       webPdExamples.init()
-      
+
       var patch
       $.get('pd/main.pd', function(mainStr) {
         // Loading the patch
@@ -55,13 +55,15 @@
 
 
       function setAmp (am){
-
         Pd.send("amp", [parseFloat(am)] );
       }
       function setFreq (fq){
-
         Pd.send("amp", [parseFloat(fq)] );
       }
+      function setLPfreq (lpf){
+        Pd.send("lowPass", [parseFloat(lpf)] );
+      }
+
     </script>
 
   </body>

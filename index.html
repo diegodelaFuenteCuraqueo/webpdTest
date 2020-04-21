@@ -37,14 +37,6 @@
       
       webPdExamples.init()
 
-      $("input#LPfreq").live("change", function() {
-         Pd.send('LPfreq', [parseFloat($('#LPfreq').val())]);
-      });
-
-      $("input#ampInput").live("change", function() {
-         Pd.send('ampInput', [parseFloat($('#ampInput').val())]);
-      });
-
       var patch
       $.get('pd/main.pd', function(mainStr) {
         // Loading the patch
@@ -53,7 +45,7 @@
         webPdExamples.patchLoaded(mainStr)
       })
 
-
+      /*
       $('#LPfreq').submit(function(event) {
         event.preventDefault()
         Pd.send('LPfreq', [parseFloat($('#LPfreq').val())])
@@ -63,7 +55,7 @@
         event.preventDefault()
         Pd.send('ampIn', [parseFloat($('#ampInput').val())])
       })
-
+      */
 
 
       function setAmp (am){

@@ -19,20 +19,28 @@
     <button id="startButton">Start</button>
     
     <div id="controls">
-      <form id="setFreq">
-        <input type="text" id="freqInput" />
-        <input type="submit" value="Set frequency" />
-      </form>
-
+      <div class="slidecontainer">
+        <input type="range" min="20" max="10000" value="1000" class="slider" id="LPfreq" name="LPfreq">
+        <input type="range" min="0" max="2." value=".5" class="slider" id="ampInput" name="ampInput">
+      </div>
+      <!--
       <form id="setAmp">
         <input type="text" id="ampInput" name="ampInput" />
         <input type="submit" value="Set Amplitude" />
-      </form>
+      </form> -->
     </div>
 
     <script type="text/javascript">
       
       webPdExamples.init()
+
+      $("input#LPfreq").live("change", function() {
+         Pd.send('LPfreq', [parseFloat($('#LPfreq').val())]);
+      });
+
+      $("input#ampInput").live("change", function() {
+         Pd.send('ampInput', [parseFloat($('#ampInput').val())]);
+      });
 
       var patch
       $.get('pd/main.pd', function(mainStr) {
@@ -42,14 +50,15 @@
         webPdExamples.patchLoaded(mainStr)
       })
 
-      $('#setFreq').submit(function(event) {
+
+      $('#LPfreq').submit(function(event) {
         event.preventDefault()
-        Pd.send('freq', [parseFloat($('#freqInput').val())])
+        Pd.send('LPfreq', [parseFloat($('#LPfreq').val())])
       })
 
       $('#setAmp').submit(function(event) {
         event.preventDefault()
-        Pd.send('amp', [parseFloat($('#ampInput').val())])
+        Pd.send('ampIn', [parseFloat($('#ampInput').val())])
       })
 
 

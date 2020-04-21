@@ -8,8 +8,7 @@
     <script src="lib/webpd-latest.js"></script>
     <script src="lib/examples.js"></script>
 
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
-    <link href='/lib/examples.css' rel='stylesheet' type='text/css'>
+     <link href='/lib/examples.css' rel='stylesheet' type='text/css'>
   </head>
 
   <body>
@@ -17,9 +16,14 @@
     <button id="startButton">Start</button>
     
     <div id="controls">
-      <form>
+      <form id="setFreq">
         <input type="text" id="freqInput" />
         <input type="submit" value="Set frequency" />
+      </form>
+
+      <form id="setAmp">
+        <input type="text" id="ampInput" />
+        <input type="submit" value="Set Amplitude" />
       </form>
     </div>
 
@@ -30,7 +34,12 @@
       
       webPdExamples.init()
 
-      $('form').submit(function(event) {
+      $('#setFreq').submit(function(event) {
+        event.preventDefault()
+        Pd.send('freq', [parseFloat($('#freqInput').val())])
+      })
+
+      $('#setAmp').submit(function(event) {
         event.preventDefault()
         Pd.send('freq', [parseFloat($('#freqInput').val())])
       })

@@ -21,7 +21,7 @@
 #X obj 375 314 osc~ 207;
 #X obj 515 282 r amp;
 #X obj 371 372 *~;
-#X obj 248 375 *~;
+#X obj 248 375 *~ 1;
 #X connect 1 0 2 1;
 #X connect 2 0 20 0;
 #X connect 3 0 19 0;

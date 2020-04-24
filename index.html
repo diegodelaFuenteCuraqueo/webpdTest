@@ -47,9 +47,8 @@
 
       $(document).on('input', '#amp', function() {
         let a = $('#amp').val() ;
-        Pd.send("amp", [parseFloat(a) ] );
+        Pd.send("amp", [ parseFloat(a) ] );
         console.log(a+" -> [r amp]");
-
       });
 
 

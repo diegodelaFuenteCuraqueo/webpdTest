@@ -24,7 +24,7 @@
     </div>
 
     <div class="container center_div">
-      <button id="nuevasNotas" name="nuevasNotas" value="nuevasNotas">nuevasNotas</button>
+      <button id="nuevasNotas" name="nuevasNotas" value="nuevasNotas" onclick="nuevasNotas()">nuevasNotas</button>
       <input type="range" name="amp" id="amp" min="0.0" max="2.2" step="0.01">
       <label for="amp" id="ampLabel">Amp: </label>
     </div>
@@ -65,16 +65,16 @@
 
       //array
       function leerArray(){
-        Pd.send("leerArray", "bang");
+        Pd.send("leerArray", ["bang"] );
       } 
       function grabarArray(){
-        Pd.send("leerArray", "bang");
+        Pd.send("leerArray", ["bang"]);
       }    
       $(document).on('input', '#ampArray', function() {
         let rangeAmp = $('#ampArray').val() ;
         Pd.send("ampArray", [ parseFloat(rangeAmp) ] );
         console.log(rangeAmp+" -> [r ampArray]");
-        setAmpLabel(rangeAmp);
+        ampArrayLabel(rangeAmp);
       });
       function ampArrayLabel (ampi){
         $("#ampArrayLabel").empty();

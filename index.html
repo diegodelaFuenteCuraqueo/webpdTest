@@ -7,34 +7,25 @@
     <script url="lib/pd-fileutils.js"></script>
     <script src="lib/webpd-latest.js"></script>
     <script src="lib/examples.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-     <link href='/lib/examples.css' rel='stylesheet' type='text/css'>
+  <!-- <link href='/lib/examples.css' rel='stylesheet' type='text/css'> -->
+  <link href='styles/style1.css' rel='stylesheet' type='text/css'>
+
   </head>
 
   <body>
 
-    <H1> PD TEST1 </H1>
+    <H1 align="center"> PD TEST1 </H1>
 
+    <div class="container center_div">
     <div id="loading">Loading ...</div>
     <button id="startButton">Start</button>
-    
-    <div id="controls">
-      <div class="slidecontainer">
-        <LABEL id="LPHlabel" name= "LPHlabel" for="LPfreq">LowPass freq.</LABEL>
-        <input type="range" min="20" max="10000" value="1000" class="slider" id="LPfreq" name="LPfreq" oninput="setLPfreq()">
+    </div>
 
-        <LABEL  id="ampLabel" name="ampLabel" for="ampInput">Mic. amp.</LABEL>
-        <input type="range" min="0" max="100." step="0.01" value=".5" class="slider" id="ampInput" name="ampInput" oninput="setAmp()">
-      </div>
-
+    <div class="container center_div">
+      <input type="range" name="amp" id="amp" min="0.0" max="2.2" step="0.01">
       <button id="nuevasNotas" name="nuevasNotas" value="nuevasNotas" onclick="nuevasNotas()">nuevasNotas</button>
-
-      <p id="txt"> val </p>
-      <!--
-      <form id="setAmp">
-        <input type="text" id="ampInput" name="ampInput" />
-        <input type="submit" value="Set Amplitude" />
-      </form> -->
     </div>
 
     <script type="text/javascript">
@@ -45,21 +36,9 @@
       $.get('pd/main2.pd', function(mainStr) {
         // Loading the patch
         patch = Pd.loadPatch(mainStr)
-
         webPdExamples.patchLoaded(mainStr)
       })
 
-      /*
-      $('#LPfreq').submit(function(event) {
-        event.preventDefault()
-        Pd.send('LPfreq', [parseFloat($('#LPfreq').val())])
-      })
-
-      $('#setAmp').submit(function(event) {
-        event.preventDefault()
-        Pd.send('ampIn', [parseFloat($('#ampInput').val())])
-      })
-      */
 
       function nuevasNotas(){
         Pd.send("activarNotas", "bang");
@@ -74,19 +53,8 @@
         $("#ampLabel").empty();
         $("#ampLabel").append("Amp: "+$('#ampInput').val());
         //$("#txt").text() = $('#ampInput').val();
-
       }
 
-
-      function setLPfreq (){
-        Pd.send("LPfreq", [parseFloat( $('#LPfreq').val() )] );
-        $("#LPHlabel").empty();
-        $("#LPHlabel").append("LPhz: "+$('#LPfreq').val());
-
-      }
-      function setLPfreqVal (lpf){
-        Pd.send("LPfreq", [parseFloat( lpf )] );
-      }
 
     </script>
 

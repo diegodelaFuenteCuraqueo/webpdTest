@@ -1,6 +1,6 @@
 webPdExamples.init()
 
-var patch
+var patch 
 $.get('pd/main2.pd', function(mainStr) {
   // Loading the patch
   patch = Pd.loadPatch(mainStr)

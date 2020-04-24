@@ -15,7 +15,7 @@
   <link href='styles/style1.css' rel='stylesheet' type='text/css'>
 
   <script src="scripts/script1.js"></script>
-  
+
   </head>
 
   <body>
@@ -23,70 +23,112 @@
     <H1 align="center"> PD TEST1 </H1>
 
     <div class="container center_div">
-      <div id="loading">Loading ...</div>
-      <button id="startButton">Start</button> <!-- este boton es jodidamente misterioso...-->
+      <h2>Init Patch</h2>
+
+      <div class="row">
+
+        <div class="col">
+          <div id="loading">Loading ...</div>
+          <button id="startButton">Start</button> <!-- este boton es jodidamente misterioso...-->
+
+          <div class="row">
+            <p>El misterioso botón Start enciende el DAC de PD*. No tengo idea de como funciona ni tampoco sé qué función tiene asignada porque no incluye tag onlick ni nada parecido.</p>
+            <small>*seguramente este botoncito misterioso está controlado por la librería web-pd.js</small>
+          </div>
+        </div>
+
+        <div class="col">
+          <code>
+            webPdExamples.init() <br>
+            var patch<br>
+            $.get('pd/main2.pd', function(mainStr) {<br>
+            &nbsp; &nbsp;// Loading the patch<br>
+            &nbsp; &nbsp;patch = Pd.loadPatch(mainStr)<br>
+            &nbsp; &nbsp;webPdExamples.patchLoaded(mainStr)<br>
+            })<br>
+          </code>
+        </div>
+
+       
+      </div>
     </div>
 
+    <!--Patch con osciladores-->
     <div class="container center_div">
-      <button id="nuevasNotas" name="nuevasNotas" value="nuevasNotas" onclick="nuevasNotas()">nuevasNotas</button>
-      <input type="range" name="amp" id="amp" min="0.0" max="2.2" step="0.01">
-      <label for="amp" id="ampLabel">Amp: </label>
+      <h2>Osciladores c/ glissandos</h2>
+
+      <div class=row>  
+
+        <div class="col">
+          <button id="nuevasNotas" name="nuevasNotas" value="nuevasNotas" onclick="nuevasNotas()">nuevasNotas</button>
+          <input type="range" name="amp" id="amp" min="0.0" max="2.2" step="0.01">
+          <label for="amp" id="ampLabel">Amp: </label>
+
+          <div class="row">
+            <p>El botón nuevasNotas genera alturas aleatorias para dos [osc~] (L y R). El slider controla la intensidad de los osciladores</p>
+          </div>
+
+        </div>
+
+        <div class="col">
+          <code>
+            $(document).on('input', '#amp', function() {<br>
+            &nbsp; &nbsp;let rangeAmp = $('#amp').val() ;<br>
+            &nbsp; &nbsp;Pd.send("amp", [ parseFloat(rangeAmp) ] );<br>
+            &nbsp; &nbsp;console.log(rangeAmp+" -> [r amp]");<br>
+            &nbsp; &nbsp;setAmpLabel(rangeAmp);<br>
+            });<br>
+            function setAmpLabel (ampi){<br>
+            &nbsp; &nbsp;$("#ampLabel").empty();<br>
+            &nbsp; &nbsp;$("#ampLabel").append("Amp: "+ampi);<br>
+            }<br>
+          </code>
+        </div>
+
+
+      </div>
     </div>
 
+    <!--Patch con array (aun no logro grabar desde el browser-->
     <div class="container center_div">
-      <button id="grabarArray" name="grabarArray" value="grabarArray" onclick="grabarArray()">grabarArray</button>
-      <button id="leerArray" name="leerArray" value="leerArray" onclick="leerArray()">leerArray</button>
-      <input type="range" name="ampArray" id="ampArray" min="0.0" max="2.2" step="0.01">
-      <label for="amp" id="ampArrayLabel">AmpArray: </label>
+      <h2>Arrays (aún no logro grabar dsd el browser)</h2>
+      <div class="row">
+        <div class="col"> 
+          <button id="grabarArray" name="grabarArray" value="grabarArray" onclick="grabarArray()">grabarArray</button>
+          <button id="leerArray" name="leerArray" value="leerArray" onclick="leerArray()">leerArray</button>
+          <input type="range" name="ampArray" id="ampArray" min="0.0" max="2.2" step="0.01">
+          <label for="amp" id="ampArrayLabel">AmpArray: </label>
+
+          <div class="row">
+            <p>El botón grabar array está vinculado a un objeto [r grabarArray] que activa un bang, el que a su vez está conectado a un objeto [tabwrite~ array1]*. EL slider controla la amplitud del [tabread4~ array1]</p>
+            <small>*parece q este objeto está fallando o algo así...</small>
+          </div>
+        </div>
+
+        <div class = "col">
+          <code>
+            function leerArray(){ <br>
+             &nbsp; &nbsp;Pd.send("leerArray", "bang" );<br>
+            } <br>
+            function grabarArray(){<br>
+             &nbsp; &nbsp;Pd.send("grabarArray", "bang");<br>
+            }    <br>
+            $(document).on('input', '#ampArray', function() {<br>
+              &nbsp; &nbsp;let rangeAmp = $('#ampArray').val() ;<br>
+              &nbsp; &nbsp;Pd.send("ampArray", [ parseFloat(rangeAmp) ] );<br>
+              &nbsp; &nbsp;console.log(rangeAmp+" -> [r ampArray]");<br>
+              &nbsp; &nbsp;ampArrayLabel(rangeAmp);<br>
+            });<br>
+            function ampArrayLabel (ampi){<br>
+              &nbsp; &nbsp;$("#ampArrayLabel").empty();<br>
+              &nbsp; &nbsp;$("#ampArrayLabel").append("ampArray: "+ampi);<br>
+            }<br>
+          </code>
+        </div>
+
+
+      </div>
     </div>
-
-    <script type="text/javascript">
-      /*
-      webPdExamples.init()
-
-      var patch
-      $.get('pd/main2.pd', function(mainStr) {
-        // Loading the patch
-        patch = Pd.loadPatch(mainStr)
-        webPdExamples.patchLoaded(mainStr)
-      })
-
-      function nuevasNotas(){
-        Pd.send("activarNotas", "bang");
-      }    
-
-      //amp
-      $(document).on('input', '#amp', function() {
-        let rangeAmp = $('#amp').val() ;
-        Pd.send("amp", [ parseFloat(rangeAmp) ] );
-        console.log(rangeAmp+" -> [r amp]");
-        setAmpLabel(rangeAmp);
-      });
-      function setAmpLabel (ampi){
-        $("#ampLabel").empty();
-        $("#ampLabel").append("Amp: "+ampi);
-      }
-
-
-      //array
-      function leerArray(){
-        Pd.send("leerArray", "bang" );
-      } 
-      function grabarArray(){
-        Pd.send("grabarArray", "bang");
-      }    
-      $(document).on('input', '#ampArray', function() {
-        let rangeAmp = $('#ampArray').val() ;
-        Pd.send("ampArray", [ parseFloat(rangeAmp) ] );
-        console.log(rangeAmp+" -> [r ampArray]");
-        ampArrayLabel(rangeAmp);
-      });
-      function ampArrayLabel (ampi){
-        $("#ampArrayLabel").empty();
-        $("#ampArrayLabel").append("ampArray: "+ampi);
-      }
-    */
-    </script>
 
   </body>
 </html>

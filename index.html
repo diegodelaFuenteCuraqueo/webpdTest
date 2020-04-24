@@ -25,10 +25,40 @@
       <button id="startButton">Start</button> <!-- este boton es jodidamente misterioso...-->
     </div>
 
+<!--Patch con osciladores-->
     <div class="container center_div">
-      <button id="nuevasNotas" name="nuevasNotas" value="nuevasNotas" onclick="nuevasNotas()">nuevasNotas</button>
-      <input type="range" name="amp" id="amp" min="0.0" max="2.2" step="0.01">
-      <label for="amp" id="ampLabel">Amp: </label>
+      <h2>Osciladores c/ glissandos</h2>
+
+      <div class=row>  
+
+        <div class="col">
+          <button id="nuevasNotas" name="nuevasNotas" value="nuevasNotas" onclick="nuevasNotas()">nuevasNotas</button>
+          <input type="range" name="amp" id="amp" min="0.0" max="2.2" step="0.01">
+          <label for="amp" id="ampLabel">Amp: </label>
+
+          <div class="row">
+            <p>El botón nuevasNotas genera alturas aleatorias para dos [osc~] (L y R). El slider controla la intensidad de los osciladores</p>
+          </div>
+
+        </div>
+
+        <div class="col">
+          <code>
+            $(document).on('input', '#amp', function() {<br>
+            &nbsp; &nbsp;let rangeAmp = $('#amp').val() ;<br>
+            &nbsp; &nbsp;Pd.send("amp", [ parseFloat(rangeAmp) ] );<br>
+            &nbsp; &nbsp;console.log(rangeAmp+" -> [r amp]");<br>
+            &nbsp; &nbsp;setAmpLabel(rangeAmp);<br>
+            });<br>
+            function setAmpLabel (ampi){<br>
+            &nbsp; &nbsp;$("#ampLabel").empty();<br>
+            &nbsp; &nbsp;$("#ampLabel").append("Amp: "+ampi);<br>
+            }<br>
+          </code>
+        </div>
+
+
+      </div>
     </div>
 
     <div class="container center_div">

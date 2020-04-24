@@ -24,12 +24,19 @@
     </div>
 
     <div class="container center_div">
-      <input type="range" name="amp" id="amp" min="0.0" max="2.2" step="0.01" onchange="setAmp()">
       <button id="nuevasNotas" name="nuevasNotas" value="nuevasNotas">nuevasNotas</button>
+      <input type="range" name="amp" id="amp" min="0.0" max="2.2" step="0.01">
+      <label for="amp" id="ampLabel">Amp: </label>
+    </div>
+
+    <div class="container center_div">
+      <button id="grabarArray" name="grabarArray" value="grabarArray" onclick="grabarArray()">grabarArray</button>
+      <button id="leerArray" name="leerArray" value="leerArray" onclick="leerArray()">leerArray</button>
+      <input type="range" name="ampArray" id="ampArray" min="0.0" max="2.2" step="0.01">
+      <label for="amp" id="ampArrayLabel">AmpArray: </label>
     </div>
 
     <script type="text/javascript">
-      
       webPdExamples.init()
 
       var patch
@@ -39,26 +46,40 @@
         webPdExamples.patchLoaded(mainStr)
       })
 
-
-
       function nuevasNotas(){
         Pd.send("activarNotas", "bang");
       }    
 
+      //amp
       $(document).on('input', '#amp', function() {
-        let a = $('#amp').val() ;
-        Pd.send("amp", [ parseFloat(a) ] );
-        console.log(a+" -> [r amp]");
+        let rangeAmp = $('#amp').val() ;
+        Pd.send("amp", [ parseFloat(rangeAmp) ] );
+        console.log(rangeAmp+" -> [r amp]");
+        setAmpLabel(rangeAmp);
       });
-      /*
-      function setAmp (){
-        Pd.send("ampIn", [parseFloat( $('#ampInput').val() )*0.01] );
+      function setAmpLabel (ampi){
         $("#ampLabel").empty();
-        $("#ampLabel").append("Amp: "+$('#ampInput').val());
-        //$("#txt").text() = $('#ampInput').val();
+        $("#ampLabel").append("Amp: "+ampi);
       }
-        */
 
+
+      //array
+      function leerArray(){
+        Pd.send("leerArray", "bang");
+      } 
+      function grabarArray(){
+        Pd.send("leerArray", "bang");
+      }    
+      $(document).on('input', '#ampArray', function() {
+        let rangeAmp = $('#ampArray').val() ;
+        Pd.send("ampArray", [ parseFloat(rangeAmp) ] );
+        console.log(rangeAmp+" -> [r ampArray]");
+        setAmpLabel(rangeAmp);
+      });
+      function ampArrayLabel (ampi){
+        $("#ampArrayLabel").empty();
+        $("#ampArrayLabel").append("ampArray: "+ampi);
+      }
 
     </script>
 

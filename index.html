@@ -27,6 +27,8 @@
         <input type="range" min="0" max="100." step="0.01" value=".5" class="slider" id="ampInput" name="ampInput" oninput="setAmp()">
       </div>
 
+      <button id="nuevasNotas" name="nuevasNotas" value="nuevasNotas" onclick="nuevasNotas()"></button>
+
       <p id="txt"> val </p>
       <!--
       <form id="setAmp">
@@ -58,6 +60,10 @@
         Pd.send('ampIn', [parseFloat($('#ampInput').val())])
       })
       */
+
+      function nuevasNotas(){
+        Pd.send("activarNotas", "bang");
+      }    
 
 
       function setAmpVal (am){

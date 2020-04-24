@@ -45,7 +45,9 @@
       }    
 
       function setAmp(){
-        Pd.send("amp", $("#amp").val() );
+        let a = $("#amp").val();
+        Pd.send("amp", a );
+        console.log(a);
       }  
 
       function setAmpVal (am){

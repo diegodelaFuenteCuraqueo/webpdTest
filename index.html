@@ -19,12 +19,12 @@
     <H1 align="center"> PD TEST1 </H1>
 
     <div class="container center_div">
-    <div id="loading">Loading ...</div>
-    <button id="startButton">Start</button>
+      <div id="loading">Loading ...</div>
+      <button id="startButton">Start</button> <!-- este boton es jodidamente misterioso...-->
     </div>
 
     <div class="container center_div">
-      <input type="range" name="amp" id="amp" min="0.0" max="2.2" step="0.01">
+      <input type="range" name="amp" id="amp" min="0.0" max="2.2" step="0.01" onchange="setAmp()">
       <button id="nuevasNotas" name="nuevasNotas" value="nuevasNotas" onclick="nuevasNotas()">nuevasNotas</button>
     </div>
 
@@ -44,16 +44,21 @@
         Pd.send("activarNotas", "bang");
       }    
 
+      function setAmp(){
+        Pd.send("amp", $("#amp").val() );
+      }  
 
       function setAmpVal (am){
         Pd.send("ampIn", [parseFloat(am)] );
       }
+      /*
       function setAmp (){
         Pd.send("ampIn", [parseFloat( $('#ampInput').val() )*0.01] );
         $("#ampLabel").empty();
         $("#ampLabel").append("Amp: "+$('#ampInput').val());
         //$("#txt").text() = $('#ampInput').val();
       }
+        */
 
 
     </script>

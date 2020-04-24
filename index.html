@@ -45,7 +45,7 @@
       }    
 
       function setAmp(){
-        let a = $("#amp").val();
+        let a = parseFloat($("#amp").val());
         Pd.send("amp", a );
         console.log(a);
       }  

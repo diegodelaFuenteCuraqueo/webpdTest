@@ -39,15 +39,19 @@
         webPdExamples.patchLoaded(mainStr)
       })
 
+
+
       function nuevasNotas(){
         Pd.send("activarNotas", "bang");
       }    
 
-      function setAmp(){
-        let a = parseFloat($("#amp").val());
+      $(document).on('input', '#amp', function() {
+        let a = $('#amp').val() ;
         Pd.send("amp", [parseFloat(a) ] );
         console.log(a+" -> [r amp]");
-      }  
+
+      });
+
 
 
       /*

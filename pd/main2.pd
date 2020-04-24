@@ -21,9 +21,11 @@
 #X obj 375 314 osc~ 207;
 #X obj 515 282 r amp;
 #X obj 371 372 *~;
-#X obj 248 375 *~ 1;
+#X msg 515 303 \$1 500;
+#X obj 515 324 line~;
+#X obj 248 375 *~;
 #X connect 1 0 2 1;
-#X connect 2 0 20 0;
+#X connect 2 0 22 0;
 #X connect 3 0 19 0;
 #X connect 4 0 2 0;
 #X connect 5 0 3 0;
@@ -39,6 +41,9 @@
 #X connect 15 0 16 0;
 #X connect 16 0 13 0;
 #X connect 17 0 3 1;
-#X connect 18 0 19 1;
+#X connect 18 0 20 0;
 #X connect 19 0 0 1;
-#X connect 20 0 0 0;
+#X connect 20 0 21 0;
+#X connect 21 0 19 1;
+#X connect 21 0 22 1;
+#X connect 22 0 0 0;

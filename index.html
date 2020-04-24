@@ -65,10 +65,10 @@
 
       //array
       function leerArray(){
-        Pd.send("leerArray", ["bang"] );
+        Pd.send("leerArray", "bang" );
       } 
       function grabarArray(){
-        Pd.send("leerArray", ["bang"]);
+        Pd.send("grabarArray", "bang");
       }    
       $(document).on('input', '#ampArray', function() {
         let rangeAmp = $('#ampArray').val() ;

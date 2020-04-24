@@ -5,7 +5,7 @@ $.get('pd/main2.pd', function(mainStr) {
   // Loading the patch
   patch = Pd.loadPatch(mainStr)
   webPdExamples.patchLoaded(mainStr)
-})
+}) 
 
 function nuevasNotas(){
   Pd.send("activarNotas", "bang");

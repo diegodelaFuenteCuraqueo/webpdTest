@@ -1,0 +1,28 @@
+<!doctype HTML>
+<html>
+  <head>
+    <script src="script/jquery.js"></script>
+    <script src="script/webpd-latest.js"></script>
+    <script>
+        var patch
+        $.get('patches/metroExample.pd', function(patchStr) {
+          patch = Pd.loadPatch(patchStr)
+          Pd.start()
+        })
+
+        var tog = 1;
+
+        function activarMetro(){
+          Pd.send("metroOn", [ parseInt(tog++) ] );
+          tog = tog%2;
+        }
+    </script>
+  </head>
+
+  <body>
+    
+     <button id="metroOn" name="metroOn" value="metroOn" onclick="activarMetro()">metroOn</button>
+
+
+  </body>
+</html>
